@@ -59,20 +59,7 @@ RUN curl -L https://github.com/novnc/noVNC/archive/refs/tags/v1.3.0.zip -o /tmp/
     rm -rf /tmp/novnc.zip /tmp/noVNC-1.3.0
 
 # Start script
-RUN cat <<'EOF' > /start.sh
-#!/bin/bash
-set -e
 
-DISK="/data/vm.raw"
-IMG="/opt/qemu/ubuntu.img"
-SEED="/opt/qemu/seed.iso"
-
-# Create disk if it doesn't exist
-if [ ! -f "$DISK" ]; then
-    echo "Creating VM disk..."
-    qemu-img convert -f qcow2 -O raw "$IMG" "$DISK"
-    qemu-img resize "$DISK" 900G
-fi
 
 # Start VM
 qemu-system-x86_64 \
